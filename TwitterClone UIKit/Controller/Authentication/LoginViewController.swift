@@ -63,7 +63,6 @@ class LoginViewController: UIViewController {
         return button
     }()
     //MARK: - LifeCycle
-    
     override func viewDidLoad() {
          super.viewDidLoad()
         configureUI()
@@ -77,6 +76,8 @@ class LoginViewController: UIViewController {
     
     @objc func handleShowSignUp() {
         print("Show sign up page")
+        let controller = RegistrationViewController()
+        navigationController?.pushViewController(controller, animated: true)
     }
     
     //MARK: - Helpers
