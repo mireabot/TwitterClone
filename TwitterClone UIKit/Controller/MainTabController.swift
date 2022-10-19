@@ -6,6 +6,7 @@
 //
 
 import UIKit
+import Firebase
 
 class MainTabController: UITabBarController {
     
@@ -23,12 +24,35 @@ class MainTabController: UITabBarController {
 
     override func viewDidLoad() {
         super.viewDidLoad()
-
-        configureViewController()
-        configureUI() 
+//        logOut()
+        view.backgroundColor = .twitterBlue
+        authUserandUpdateUI()
         
     }
+//    MARK: - API Section
     
+    func authUserandUpdateUI() {
+        if Auth.auth().currentUser == nil {
+            DispatchQueue.main.async {
+                let nav = UINavigationController(rootViewController: LoginViewController())
+                nav.modalPresentationStyle = .fullScreen
+                self.present(nav,animated: true, completion: nil)
+            }
+        }
+        else {
+            configureViewController()
+            configureUI()
+        }
+    }
+    
+    func logOut() {
+        do {
+            try Auth.auth().signOut()
+        }
+        catch let error {
+            print("DEBUG: Failed with \(error.localizedDescription)")
+        }
+    }
     //MARK: - Selectors
     @objc func handleActionButtonTapped() {
         print("pressed")

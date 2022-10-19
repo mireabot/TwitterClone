@@ -28,6 +28,7 @@
 		35874EFC28F9F18800196FDB /* NotificationsController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 35874EFB28F9F18800196FDB /* NotificationsController.swift */; };
 		35874EFE28F9F19300196FDB /* MessagingController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 35874EFD28F9F19300196FDB /* MessagingController.swift */; };
 		35874F0028F9FAB400196FDB /* Extensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 35874EFF28F9FAB400196FDB /* Extensions.swift */; };
+		35DEBD052900583800F47613 /* AuthService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 35DEBD042900583800F47613 /* AuthService.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -49,6 +50,7 @@
 		35874EFB28F9F18800196FDB /* NotificationsController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NotificationsController.swift; sourceTree = "<group>"; };
 		35874EFD28F9F19300196FDB /* MessagingController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MessagingController.swift; sourceTree = "<group>"; };
 		35874EFF28F9FAB400196FDB /* Extensions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Extensions.swift; sourceTree = "<group>"; };
+		35DEBD042900583800F47613 /* AuthService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AuthService.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -125,6 +127,7 @@
 		35874EF028F9EF4900196FDB /* API */ = {
 			isa = PBXGroup;
 			children = (
+				35DEBD042900583800F47613 /* AuthService.swift */,
 			);
 			path = API;
 			sourceTree = "<group>";
@@ -251,6 +254,7 @@
 				35874EDC28F9EEDE00196FDB /* AppDelegate.swift in Sources */,
 				35874F0028F9FAB400196FDB /* Extensions.swift in Sources */,
 				354B698D28FCA3FA00C84CF1 /* RegistrationViewController.swift in Sources */,
+				35DEBD052900583800F47613 /* AuthService.swift in Sources */,
 				35874EFA28F9F17A00196FDB /* ExploreController.swift in Sources */,
 				35874EDE28F9EEDE00196FDB /* SceneDelegate.swift in Sources */,
 				35874EF628F9F02B00196FDB /* MainTabController.swift in Sources */,
@@ -413,7 +417,7 @@
 				INFOPLIST_KEY_UIMainStoryboardFile = Main;
 				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPad = "UIInterfaceOrientationPortrait UIInterfaceOrientationPortraitUpsideDown UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
 				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPhone = "UIInterfaceOrientationPortrait UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
-				IPHONEOS_DEPLOYMENT_TARGET = 15.0;
+				IPHONEOS_DEPLOYMENT_TARGET = 14.0;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
 					"@executable_path/Frameworks",
@@ -442,7 +446,7 @@
 				INFOPLIST_KEY_UIMainStoryboardFile = Main;
 				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPad = "UIInterfaceOrientationPortrait UIInterfaceOrientationPortraitUpsideDown UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
 				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPhone = "UIInterfaceOrientationPortrait UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
-				IPHONEOS_DEPLOYMENT_TARGET = 15.0;
+				IPHONEOS_DEPLOYMENT_TARGET = 14.0;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
 					"@executable_path/Frameworks",

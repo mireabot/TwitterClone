@@ -123,30 +123,17 @@ class RegistrationViewController: UIViewController {
         guard let fullName = fullNameTextField.text else { return }
         guard let userName = usernameTextField.text else { return }
         
-        guard let imageData = profileImage.jpegData(compressionQuality: 0.3) else { return }
-        let fileName = NSUUID().uuidString
-        let storageRef = STORAGE_PROFILE_IMAGES.child(fileName)
+        let credentials = AuthCredentials(email: email, password: password, fullName: fullName, userName: userName, profileImage: profileImage)
         
-        storageRef.putData(imageData, metadata: nil) { (error, meta) in
-            storageRef.downloadURL { (url, error) in
-                guard let profileImageURL = url?.absoluteString else { return }
-                
-                Auth.auth().createUser(withEmail: email, password: password) { (result, error) in
-                    if let error = error {
-                        print("Sign Up error \(error.localizedDescription)")
-                        return
-                    }
+        AuthService.shared.registerUser(credentials: credentials) { (error, ref) in
+            
+            guard let window = UIApplication.shared.windows.first(where: { $0.isKeyWindow}) else { return }
+            
+            guard let tab = window.rootViewController as? MainTabController else { return }
+            
+            tab.authUserandUpdateUI()
                     
-                    guard let uid = result?.user.uid else { return }
-                    
-                    // print("DEBUG: Registration User")
-                    let values = ["email": email, "username": userName, "fullName": fullName, "profileImageURL": profileImageURL]
-                    
-                    REF_USERS.child(uid).updateChildValues(values) { (error, ref) in
-                        print("Updated user information")
-                    }
-                }
-            }
+            self.dismiss(animated: true, completion: nil)
         }
     }
     
@@ -168,7 +155,6 @@ class RegistrationViewController: UIViewController {
         stack.distribution = .fillEqually
         view.addSubview(stack)
         stack.anchor(top: plusPhotoButton.bottomAnchor, left: view.leftAnchor, right: view.rightAnchor, paddingTop: 32, paddingLeft: 32,paddingRight: 32)
-        
         view.addSubview(haveAccountButton)
         haveAccountButton.anchor(left: view.leftAnchor, bottom: view.safeAreaLayoutGuide.bottomAnchor, right: view.rightAnchor, paddingLeft: 40, paddingRight: 40)
     }
