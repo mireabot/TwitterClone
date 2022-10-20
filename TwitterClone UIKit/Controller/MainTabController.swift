@@ -11,6 +11,16 @@ import Firebase
 class MainTabController: UITabBarController {
     
     // MARK: - Properties
+    
+    var user: UserModel? {
+        didSet {
+            guard let nav = viewControllers?[0] as? UINavigationController else { return }
+            guard let feed = nav.viewControllers.first as? FeedViewController else { return }
+            
+            feed.user = user
+        }
+    }
+    
     let actionButton : UIButton = {
         let button = UIButton(type: .system)
         button.tintColor = .white
@@ -21,15 +31,21 @@ class MainTabController: UITabBarController {
     }()
     
     //MARK: - Lifecycle
-
+    
     override func viewDidLoad() {
         super.viewDidLoad()
-//        logOut()
+        //        logOut()
         view.backgroundColor = .twitterBlue
         authUserandUpdateUI()
         
     }
-//    MARK: - API Section
+    //    MARK: - API Section
+    
+    func fetchUser() {
+        UserService.shared.fetchUser { user in
+            self.user = user
+        }
+    }
     
     func authUserandUpdateUI() {
         if Auth.auth().currentUser == nil {
@@ -42,6 +58,7 @@ class MainTabController: UITabBarController {
         else {
             configureViewController()
             configureUI()
+            fetchUser()
         }
     }
     
@@ -55,7 +72,11 @@ class MainTabController: UITabBarController {
     }
     //MARK: - Selectors
     @objc func handleActionButtonTapped() {
-        print("pressed")
+        guard let user = user else { return }
+        let controller = UploadTweetController(user: user)
+        let nav = UINavigationController(rootViewController: controller)
+        nav.modalPresentationStyle = .fullScreen
+        present(nav, animated: true, completion: nil)
     }
     
     //MARK: - Helpers
@@ -87,6 +108,6 @@ class MainTabController: UITabBarController {
         let nav = UINavigationController(rootViewController: rootViewController)
         nav.tabBarItem.image = image
         nav.navigationBar.barTintColor = .white
-        return nav 
+        return nav
     }
 }
