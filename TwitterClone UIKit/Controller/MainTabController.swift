@@ -42,7 +42,8 @@ class MainTabController: UITabBarController {
     //    MARK: - API Section
     
     func fetchUser() {
-        UserService.shared.fetchUser { user in
+        guard let uid = Auth.auth().currentUser?.uid else { return }
+        UserService.shared.fetchUser(uid: uid) { user in
             self.user = user
         }
     }
@@ -89,7 +90,7 @@ class MainTabController: UITabBarController {
     }
     
     func configureViewController() {
-        let feed = FeedViewController()
+        let feed = FeedViewController(collectionViewLayout: UICollectionViewFlowLayout())
         let nav1 = templateNavController(image: UIImage(named: "home_unselected"), rootViewController: feed)
         
         let explore = ExploreController()
@@ -108,6 +109,7 @@ class MainTabController: UITabBarController {
         let nav = UINavigationController(rootViewController: rootViewController)
         nav.tabBarItem.image = image
         nav.navigationBar.barTintColor = .white
+        nav.navigationBar.tintColor = .twitterBlue
         return nav
     }
 }

@@ -12,8 +12,7 @@ struct UserService {
     
     static let shared = UserService()
     
-    func fetchUser(completion: @escaping(UserModel) -> Void) {
-        guard let uid = Auth.auth().currentUser?.uid else { return }
+    func fetchUser(uid: String, completion: @escaping(UserModel) -> Void) {
         
         REF_USERS.child(uid).observeSingleEvent(of: .value) { snapshot in
           //  print("DEBUG: Snapshot \(snapshot)")
