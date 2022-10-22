@@ -11,6 +11,7 @@ import SDWebImage
 
 protocol ProfileHeaderDelegate: AnyObject {
     func handleDismissal()
+    func handleEditServiceButton(_ header: ProfileHeader)
 }
 
 class ProfileHeader : UICollectionReusableView {
@@ -23,7 +24,7 @@ class ProfileHeader : UICollectionReusableView {
             configure()
         }
     }
-    weak var delegare: ProfileHeaderDelegate?
+    weak var delegate: ProfileHeaderDelegate?
     
     private lazy var containerView: UIView = {
         let view = UIView()
@@ -56,7 +57,7 @@ class ProfileHeader : UICollectionReusableView {
         return iv
     }()
     
-    private lazy var serviceButton: UIButton = {
+     lazy var serviceButton: UIButton = {
         let button = UIButton(type: .system)
         button.setTitle("Loading", for: .normal)
         button.layer.borderColor = UIColor.twitterBlue.cgColor
@@ -165,11 +166,11 @@ class ProfileHeader : UICollectionReusableView {
     //MARK: - Selectors
     
     @objc func handleDismiss() {
-        delegare?.handleDismissal()
+        delegate?.handleDismissal()
     }
     
     @objc func handleServiceButton() {
-        
+        delegate?.handleEditServiceButton(self)
     }
     
     @objc func handleFollowersTapped() {
@@ -193,6 +194,9 @@ class ProfileHeader : UICollectionReusableView {
         serviceButton.setTitle(viewModel.actionButtonTitle, for: .normal)
         followingLabel.attributedText = viewModel.followingString
         followersLabel.attributedText = viewModel.followersString
+        
+        fullNameLabel.text = user.fullName
+        userNameLabel.text = viewModel.usernameText
     }
     
 }
@@ -211,6 +215,10 @@ extension ProfileHeader : ProfileFilterDelegate {
 }
 
 extension ProfileHeader: ProfileHeaderDelegate {
+    func handleEditServiceButton(_ header: ProfileHeader) {
+        
+    }
+    
     func handleDismissal() {
         
     }

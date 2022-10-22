@@ -7,13 +7,20 @@
 
 import Foundation
 import UIKit
+import Firebase
 
 private let reuseIdentifier = "TweetCell"
 private let headerIdentifier = "ProfileHeader"
 
 class ProfileController : UICollectionViewController {
     //MARK: - Properties
-    private let user: UserModel
+    private var user: UserModel
+    
+    private var tweets = [TweetModel]() {
+        didSet {
+            collectionView.reloadData()
+        }
+    }
     
     //MARK:  - LifeCycle
     
@@ -30,6 +37,9 @@ class ProfileController : UICollectionViewController {
         super.viewDidLoad()
         
         configureCollectionView()
+        fetchTweets()
+        checkFollowing()
+        fetchUserStats()
     }
     
     override func viewWillAppear(_ animated: Bool) {
@@ -39,6 +49,29 @@ class ProfileController : UICollectionViewController {
     }
     
     //MARK: - Selectors
+    
+    //MARK: - API
+    
+    func fetchTweets() {
+        TweetService.shared.fetchTweets(forUser: user) { tweets in
+            self.tweets = tweets
+        }
+    }
+    
+    func checkFollowing() {
+        UserService.shared.checkFollowing(uid: user.uid) { isFollow in
+            self.user.isFollowed = isFollow
+            self.collectionView.reloadData()
+        }
+    }
+    
+    func fetchUserStats() {
+        UserService.shared.fetchUserStats(uid: user.uid) { stats in
+            print("DEBUG: User has stats followers \(stats.followers) and following \(stats.following)")
+            self.user.stats = stats
+            self.collectionView.reloadData()
+        }
+    }
     
     //MARK: - Helpers
     
@@ -53,10 +86,12 @@ class ProfileController : UICollectionViewController {
 
 extension ProfileController {
     override func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
-        return 3
+        return tweets.count
     }
     override func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
         let cell = collectionView.dequeueReusableCell(withReuseIdentifier: reuseIdentifier, for: indexPath) as! TweetCell
+        
+        cell.tweet = tweets[indexPath.row]
         return cell
     }
 }
@@ -68,7 +103,7 @@ extension ProfileController {
         let header = collectionView.dequeueReusableSupplementaryView(ofKind: kind, withReuseIdentifier: headerIdentifier, for: indexPath) as! ProfileHeader
         
         header.user = user
-        header.delegare = self
+        header.delegate = self
         
         return header
     }
@@ -84,7 +119,34 @@ extension ProfileController : UICollectionViewDelegateFlowLayout {
     }
 }
 //MARK: - Header Delegate
+
 extension ProfileController: ProfileHeaderDelegate {
+    func handleEditServiceButton(_ header: ProfileHeader) {
+        
+        print("DEBUG: User is followed is \(user.isFollowed) before tap")
+        
+        if user.isCurrentUser {
+            print("DEBUG: User cannot follow himself")
+            return
+        }
+        
+        if user.isFollowed {
+            UserService.shared.unfollow(uid: user.uid) { (err, ref) in
+                self.user.isFollowed = false
+                //header.serviceButton.setTitle("Follow", for: .normal)
+                self.collectionView.reloadData()
+            }
+        }
+        
+        if !user.isFollowed {
+            UserService.shared.followUser(uid: user.uid) { (ref, error) in
+                self.user.isFollowed = true
+                //header.serviceButton.setTitle("Following", for: .normal)
+                self.collectionView.reloadData()
+            }
+        }
+    }
+    
     func handleDismissal() {
         navigationController?.popViewController(animated: true)
     }

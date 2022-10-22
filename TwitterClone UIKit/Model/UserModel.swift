@@ -14,6 +14,8 @@ struct UserModel {
     let username: String
     let profileImageURL: String
     let uid: String
+    var isFollowed = false
+    var stats: UserStats?
     
     var isCurrentUser: Bool {
         return Auth.auth().currentUser?.uid == uid
@@ -27,4 +29,9 @@ struct UserModel {
         self.username = dictionary["username"] as? String ?? ""
         self.profileImageURL = dictionary["profileImageURL"] as? String ?? ""
     }
+}
+
+struct UserStats {
+    let followers: Int
+    let following: Int
 }

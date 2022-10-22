@@ -26,6 +26,8 @@
 		35852B4E29034E2300FA06E7 /* ProfileFilter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 35852B4D29034E2300FA06E7 /* ProfileFilter.swift */; };
 		35852B502903504C00FA06E7 /* ProfileFilterCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 35852B4F2903504C00FA06E7 /* ProfileFilterCell.swift */; };
 		35852B5229035CA200FA06E7 /* ProfileHeaderViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 35852B5129035CA200FA06E7 /* ProfileHeaderViewModel.swift */; };
+		35852B5429045FDD00FA06E7 /* UserExploreCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 35852B5329045FDD00FA06E7 /* UserExploreCell.swift */; };
+		35852B562904660600FA06E7 /* UserViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 35852B552904660600FA06E7 /* UserViewModel.swift */; };
 		35874EDC28F9EEDE00196FDB /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 35874EDB28F9EEDE00196FDB /* AppDelegate.swift */; };
 		35874EDE28F9EEDE00196FDB /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 35874EDD28F9EEDE00196FDB /* SceneDelegate.swift */; };
 		35874EE328F9EEDE00196FDB /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 35874EE128F9EEDE00196FDB /* Main.storyboard */; };
@@ -59,6 +61,8 @@
 		35852B4D29034E2300FA06E7 /* ProfileFilter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProfileFilter.swift; sourceTree = "<group>"; };
 		35852B4F2903504C00FA06E7 /* ProfileFilterCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProfileFilterCell.swift; sourceTree = "<group>"; };
 		35852B5129035CA200FA06E7 /* ProfileHeaderViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProfileHeaderViewModel.swift; sourceTree = "<group>"; };
+		35852B5329045FDD00FA06E7 /* UserExploreCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserExploreCell.swift; sourceTree = "<group>"; };
+		35852B552904660600FA06E7 /* UserViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserViewModel.swift; sourceTree = "<group>"; };
 		35874ED828F9EEDE00196FDB /* TwitterClone UIKit.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "TwitterClone UIKit.app"; sourceTree = BUILT_PRODUCTS_DIR; };
 		35874EDB28F9EEDE00196FDB /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		35874EDD28F9EEDE00196FDB /* SceneDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SceneDelegate.swift; sourceTree = "<group>"; };
@@ -182,6 +186,7 @@
 			children = (
 				35D3A6022902F0CD0049B1DF /* TweetViewModel.swift */,
 				35852B5129035CA200FA06E7 /* ProfileHeaderViewModel.swift */,
+				35852B552904660600FA06E7 /* UserViewModel.swift */,
 			);
 			path = ViewModels;
 			sourceTree = "<group>";
@@ -194,6 +199,7 @@
 				35D3A6062902FE390049B1DF /* ProfileHeader.swift */,
 				35852B4D29034E2300FA06E7 /* ProfileFilter.swift */,
 				35852B4F2903504C00FA06E7 /* ProfileFilterCell.swift */,
+				35852B5329045FDD00FA06E7 /* UserExploreCell.swift */,
 			);
 			path = View;
 			sourceTree = "<group>";
@@ -301,6 +307,7 @@
 				357880A72901F6480063D5D8 /* UploadTweetContoller.swift in Sources */,
 				35D3A6052902F7410049B1DF /* ProfileController.swift in Sources */,
 				35D3A6072902FE390049B1DF /* ProfileHeader.swift in Sources */,
+				35852B5429045FDD00FA06E7 /* UserExploreCell.swift in Sources */,
 				35D3A6012902E2F00049B1DF /* TweetCell.swift in Sources */,
 				35874F0028F9FAB400196FDB /* Extensions.swift in Sources */,
 				354B698D28FCA3FA00C84CF1 /* RegistrationViewController.swift in Sources */,
@@ -312,6 +319,7 @@
 				35874EF628F9F02B00196FDB /* MainTabController.swift in Sources */,
 				354B698B28FCA38800C84CF1 /* LoginViewController.swift in Sources */,
 				35D3A6032902F0CD0049B1DF /* TweetViewModel.swift in Sources */,
+				35852B562904660600FA06E7 /* UserViewModel.swift in Sources */,
 				35874EF828F9F14400196FDB /* FeedController.swift in Sources */,
 				357880A22901E8D00063D5D8 /* UserModel.swift in Sources */,
 				3561EC0128FF091E00A132F6 /* Constants.swift in Sources */,
