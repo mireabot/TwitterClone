@@ -11,6 +11,8 @@ import SwiftUI
 
 protocol TweetCellDelegate : AnyObject {
     func handleProfileImageTapped(_ cell: TweetCell)
+    
+    func handleReplyTapped(_ cell: TweetCell)
 }
 
 class TweetCell : UICollectionViewCell {
@@ -131,7 +133,7 @@ class TweetCell : UICollectionViewCell {
         delegate?.handleProfileImageTapped(self)
     }
     @objc func handleCommentTapped() {
-        
+        delegate?.handleReplyTapped(self)
     }
     @objc func handleRetweetTapped() {
         

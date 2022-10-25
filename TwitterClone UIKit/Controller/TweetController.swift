@@ -16,6 +16,12 @@ class TweetController: UICollectionViewController {
     
     private let tweet: TweetModel
     
+    private var replies = [TweetModel]() {
+        didSet {
+            collectionView.reloadData()
+        }
+    }
+    
     //MARK: - LifeCycle
     
     init(tweet: TweetModel) {
@@ -32,6 +38,7 @@ class TweetController: UICollectionViewController {
         
         configureCollectionView()
         configureNavBar()
+        fetchRelies()
         
         print("DEBUG: Tweet \(tweet)")
         
@@ -48,16 +55,23 @@ class TweetController: UICollectionViewController {
     func configureNavBar() {
         navigationItem.title = "Tweet"
     }
+    //MARK: - API
+    func fetchRelies() {
+        TweetService.shared.fetchReplies(forTweet: tweet) { tweetReplies in
+            self.replies = tweetReplies
+        }
+    }
 }
 
 //MARK: - UICollectionViewData
 extension TweetController {
     override func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
-        return 3
+        return replies.count
     }
     
     override func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
         let cell = collectionView.dequeueReusableCell(withReuseIdentifier: reuseIdentifier, for: indexPath) as! TweetCell
+        cell.tweet = replies[indexPath.row]
         return cell
     }
 }

@@ -9,10 +9,13 @@ import Foundation
 import UIKit
 import SDWebImage
 
+
 class UploadTweetController : UIViewController {
     // MARK: - Properties
     
     private let user: UserModel
+    private let config: UploadTweetConfig
+    private lazy var viewModel = UploadTweetViewModel(config: config)
     
     private lazy var actionButton : UIButton = {
         let button = UIButton(type: .system)
@@ -38,13 +41,24 @@ class UploadTweetController : UIViewController {
         return iv
     }()
     
+    private lazy var replyLabel: UILabel = {
+        let label = UILabel()
+        label.font = UIFont.systemFont(ofSize: 14)
+        label.textColor = .lightGray
+        label.widthAnchor.constraint(equalToConstant: view.frame.width).isActive = true
+        label.text = "Reply to @mireabot"
+        
+        return label
+    }()
+    
     private let captionTextView = CaptionTextView()
     
     
     //MARK: - Lifecycle
     
-    init(user: UserModel) {
+    init(user: UserModel, config: UploadTweetConfig) {
         self.user = user
+        self.config = config
         super.init(nibName: nil, bundle: nil)
     }
     
@@ -67,7 +81,7 @@ class UploadTweetController : UIViewController {
     
     @objc func handleUpload() {
         guard let caption = captionTextView.text else { return }
-        TweetService.shared.uploadTweet(caption: caption) { (error, ref) in
+        TweetService.shared.uploadTweet(type: config, caption: caption) { (error, ref) in
             if let error = error {
                 print("DEBUG: Error \(error.localizedDescription)")
                 return
@@ -88,15 +102,34 @@ class UploadTweetController : UIViewController {
         let stack = UIStackView(arrangedSubviews: [profileImageView, captionTextView])
         stack.axis = .horizontal
         stack.spacing = 12
-        
-        
-        view.addSubview(stack)
-        stack.anchor(top: view.safeAreaLayoutGuide.topAnchor, left: view.leftAnchor,right: view.rightAnchor, paddingTop: 16, paddingLeft: 16,paddingRight: 16)
         stack.alignment = .leading
+        
+        /*
+        view.addSubview(stack)
+        stack.anchor(top: view.safeAreaLayoutGuide.topAnchor, left: view.leftAnchor,right: view.rightAnchor, paddingTop: 16, paddingLeft: 16,paddingRight: 16) */
+        
+        let replyStack = UIStackView(arrangedSubviews: [replyLabel, stack])
+        replyStack.axis = .vertical
+        replyStack.spacing = 12
+        //replyStack.alignment = .leading
+        
+        
+        view.addSubview(replyStack)
+        replyStack.anchor(top: view.safeAreaLayoutGuide.topAnchor, left: view.leftAnchor,right: view.rightAnchor, paddingTop: 16, paddingLeft: 16,paddingRight: 16)
         
         guard let profileImageURL = URL(string: user.profileImageURL) else { return }
         profileImageView.sd_setImage(with: profileImageURL, completed: nil)
         profileImageView.layer.masksToBounds = true
+        
+        // Configure ReplyUI
+        
+        actionButton.setTitle(viewModel.buttonTitle, for: .normal)
+        captionTextView.placeHolder.text = viewModel.placeholderTitle
+        
+        replyLabel.isHidden = !viewModel.shouldShowReply
+        
+        guard let replyText = viewModel.replyText else { return }
+        replyLabel.text = replyText
     }
     
     func configurenavigationBar() {
@@ -112,5 +145,4 @@ class UploadTweetController : UIViewController {
         navigationItem.leftBarButtonItem = UIBarButtonItem(barButtonSystemItem: .cancel, target: self, action: #selector(handleCancel))
         navigationItem.rightBarButtonItem = UIBarButtonItem(customView: actionButton)
     }
-    
 }

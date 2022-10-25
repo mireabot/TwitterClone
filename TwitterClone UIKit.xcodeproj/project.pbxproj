@@ -9,7 +9,7 @@
 /* Begin PBXBuildFile section */
 		350D07C62905AE1300FBA415 /* TweetController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 350D07C52905AE1300FBA415 /* TweetController.swift */; };
 		350D07C82905B0AA00FBA415 /* TweetHeader.swift in Sources */ = {isa = PBXBuildFile; fileRef = 350D07C72905B0AA00FBA415 /* TweetHeader.swift */; };
-		350DB8ED28FEFBFE007977F9 /* GoogleService-Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = 350DB8EC28FEFBFE007977F9 /* GoogleService-Info.plist */; };
+		350D07CA29070AA700FBA415 /* GoogleService-Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = 350D07C929070AA700FBA415 /* GoogleService-Info.plist */; };
 		354B698B28FCA38800C84CF1 /* LoginViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 354B698A28FCA38800C84CF1 /* LoginViewController.swift */; };
 		354B698D28FCA3FA00C84CF1 /* RegistrationViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 354B698C28FCA3FA00C84CF1 /* RegistrationViewController.swift */; };
 		354B698F28FCAA9400C84CF1 /* Utilities.swift in Sources */ = {isa = PBXBuildFile; fileRef = 354B698E28FCAA9400C84CF1 /* Utilities.swift */; };
@@ -47,12 +47,13 @@
 		35D3A6052902F7410049B1DF /* ProfileController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 35D3A6042902F7410049B1DF /* ProfileController.swift */; };
 		35D3A6072902FE390049B1DF /* ProfileHeader.swift in Sources */ = {isa = PBXBuildFile; fileRef = 35D3A6062902FE390049B1DF /* ProfileHeader.swift */; };
 		35DEBD052900583800F47613 /* AuthService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 35DEBD042900583800F47613 /* AuthService.swift */; };
+		35E615E429082EC8009B9652 /* UploadTweetViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 35E615E329082EC8009B9652 /* UploadTweetViewModel.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
 		350D07C52905AE1300FBA415 /* TweetController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TweetController.swift; sourceTree = "<group>"; };
 		350D07C72905B0AA00FBA415 /* TweetHeader.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TweetHeader.swift; sourceTree = "<group>"; };
-		350DB8EC28FEFBFE007977F9 /* GoogleService-Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist; path = "GoogleService-Info.plist"; sourceTree = SOURCE_ROOT; };
+		350D07C929070AA700FBA415 /* GoogleService-Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist; path = "GoogleService-Info.plist"; sourceTree = SOURCE_ROOT; };
 		354B698A28FCA38800C84CF1 /* LoginViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoginViewController.swift; sourceTree = "<group>"; };
 		354B698C28FCA3FA00C84CF1 /* RegistrationViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RegistrationViewController.swift; sourceTree = "<group>"; };
 		354B698E28FCAA9400C84CF1 /* Utilities.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Utilities.swift; sourceTree = "<group>"; };
@@ -86,6 +87,7 @@
 		35D3A6042902F7410049B1DF /* ProfileController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProfileController.swift; sourceTree = "<group>"; };
 		35D3A6062902FE390049B1DF /* ProfileHeader.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProfileHeader.swift; sourceTree = "<group>"; };
 		35DEBD042900583800F47613 /* AuthService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AuthService.swift; sourceTree = "<group>"; };
+		35E615E329082EC8009B9652 /* UploadTweetViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UploadTweetViewModel.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -144,7 +146,7 @@
 				35874EE128F9EEDE00196FDB /* Main.storyboard */,
 				35874EE428F9EEE200196FDB /* Assets.xcassets */,
 				35874EE628F9EEE200196FDB /* LaunchScreen.storyboard */,
-				350DB8EC28FEFBFE007977F9 /* GoogleService-Info.plist */,
+				350D07C929070AA700FBA415 /* GoogleService-Info.plist */,
 				35874EE928F9EEE200196FDB /* Info.plist */,
 			);
 			path = "TwitterClone UIKit";
@@ -192,6 +194,7 @@
 				35D3A6022902F0CD0049B1DF /* TweetViewModel.swift */,
 				35852B5129035CA200FA06E7 /* ProfileHeaderViewModel.swift */,
 				35852B552904660600FA06E7 /* UserViewModel.swift */,
+				35E615E329082EC8009B9652 /* UploadTweetViewModel.swift */,
 			);
 			path = ViewModels;
 			sourceTree = "<group>";
@@ -290,7 +293,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				35874EE828F9EEE200196FDB /* LaunchScreen.storyboard in Resources */,
-				350DB8ED28FEFBFE007977F9 /* GoogleService-Info.plist in Resources */,
+				350D07CA29070AA700FBA415 /* GoogleService-Info.plist in Resources */,
 				35874EE528F9EEE200196FDB /* Assets.xcassets in Resources */,
 				35874EE328F9EEDE00196FDB /* Main.storyboard in Resources */,
 			);
@@ -331,6 +334,7 @@
 				35874EF828F9F14400196FDB /* FeedController.swift in Sources */,
 				357880A22901E8D00063D5D8 /* UserModel.swift in Sources */,
 				3561EC0128FF091E00A132F6 /* Constants.swift in Sources */,
+				35E615E429082EC8009B9652 /* UploadTweetViewModel.swift in Sources */,
 				35D3A5FF2902DE250049B1DF /* TweetModel.swift in Sources */,
 				357880AB290203590063D5D8 /* TweetService.swift in Sources */,
 			);
@@ -487,6 +491,7 @@
 				INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents = YES;
 				INFOPLIST_KEY_UILaunchStoryboardName = LaunchScreen;
 				INFOPLIST_KEY_UIMainStoryboardFile = Main;
+				INFOPLIST_KEY_UISupportedInterfaceOrientations = UIInterfaceOrientationPortrait;
 				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPad = "UIInterfaceOrientationPortrait UIInterfaceOrientationPortraitUpsideDown UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
 				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPhone = "UIInterfaceOrientationPortrait UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
 				IPHONEOS_DEPLOYMENT_TARGET = 14.0;
@@ -516,6 +521,7 @@
 				INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents = YES;
 				INFOPLIST_KEY_UILaunchStoryboardName = LaunchScreen;
 				INFOPLIST_KEY_UIMainStoryboardFile = Main;
+				INFOPLIST_KEY_UISupportedInterfaceOrientations = UIInterfaceOrientationPortrait;
 				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPad = "UIInterfaceOrientationPortrait UIInterfaceOrientationPortraitUpsideDown UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
 				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPhone = "UIInterfaceOrientationPortrait UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
 				IPHONEOS_DEPLOYMENT_TARGET = 14.0;

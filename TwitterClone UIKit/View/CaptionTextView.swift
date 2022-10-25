@@ -11,7 +11,7 @@ import UIKit
 class CaptionTextView : UITextView {
     
     // MARK: - Properties
-    let placeHolder : UILabel = {
+    var placeHolder : UILabel = {
         let lb = UILabel()
         lb.font = UIFont.systemFont(ofSize: 17)
         lb.textColor = .darkGray
