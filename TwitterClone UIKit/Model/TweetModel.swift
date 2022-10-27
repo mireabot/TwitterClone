@@ -15,7 +15,7 @@ struct TweetModel {
     let likes: Int
     var timeStamp: Date!
     let retweetCount: Int
-    let user: UserModel
+    var user: UserModel
     
     init(user: UserModel, tweetID: String, dictionary: [String : Any]) {
         self.tweetID = tweetID

@@ -22,6 +22,8 @@ class TweetController: UICollectionViewController {
         }
     }
     
+    private var actionSheet : ActionSheetLauncher!
+    
     //MARK: - LifeCycle
     
     init(tweet: TweetModel) {
@@ -40,7 +42,7 @@ class TweetController: UICollectionViewController {
         configureNavBar()
         fetchRelies()
         
-        print("DEBUG: Tweet \(tweet)")
+      //  print("DEBUG: Tweet \(tweet)")
         
     }
     
@@ -55,6 +57,14 @@ class TweetController: UICollectionViewController {
     func configureNavBar() {
         navigationItem.title = "Tweet"
     }
+    
+    fileprivate func showActionSheet(forUser user: UserModel) {
+        actionSheet = ActionSheetLauncher(user: user)
+        self.actionSheet.delegate = self
+        actionSheet.showActionSheet()
+    }
+    
+    
     //MARK: - API
     func fetchRelies() {
         TweetService.shared.fetchReplies(forTweet: tweet) { tweetReplies in
@@ -100,7 +110,46 @@ extension TweetController {
         let header = collectionView.dequeueReusableSupplementaryView(ofKind: kind, withReuseIdentifier: headerIdentifier, for: indexPath) as! TweetHeader
         
         header.tweet = tweet
+        header.delegate = self
         
         return header
+    }
+}
+
+extension TweetController : TweetHeaderDelegate {
+    
+    func showActionSheet() {
+        if tweet.user.isCurrentUser {
+            showActionSheet(forUser: tweet.user)
+        }
+        else {
+            UserService.shared.checkFollowing(uid: tweet.user.uid) { isFollowed in
+                var user = self.tweet.user
+                user.isFollowed = isFollowed
+                self.showActionSheet(forUser: user)
+            }
+        }
+    }
+}
+
+//MARK: - ActionSheetLauncherDelegate
+
+
+extension TweetController: ActionSheetLauncherDelegate {
+    func didSelectOption(option: ActionSheetOptions) {
+        switch option {
+        case .follow(let userModel):
+            UserService.shared.followUser(uid: userModel.uid) { (ref, err) in
+                print("DEBUG: User with @\(userModel.username) is followed")
+            }
+        case .unfollow(let userModel):
+            UserService.shared.unfollow(uid: userModel.uid) { (ref, error) in
+                print("DEBUG: User with @\(userModel.username) is unfollowed")
+            }
+        case .report:
+            print("DEBUG: Tweet reported")
+        case .delete:
+            print("DEBUG: Tweet deleted")
+        }
     }
 }
