@@ -59,6 +59,13 @@ class FeedViewController : UICollectionViewController {
     func fetchTweets() {
         TweetService.shared.fetchTweets { tweets in
             self.tweets = tweets
+            
+            for (index, tweet) in tweets.enumerated() {
+                TweetService.shared.checkTweetLikes(tweet) { didLike in
+                    guard didLike == true else { return }
+                    self.tweets[index].didLike = true
+                }
+            }
         }
     }
     
@@ -109,6 +116,7 @@ extension FeedViewController : UICollectionViewDelegateFlowLayout {
         return CGSize(width: view.frame.width, height: height + 75)
     }
 } 
+//MARK:  - TweetCellDelegate
 
 extension FeedViewController : TweetCellDelegate {
     
@@ -124,5 +132,16 @@ extension FeedViewController : TweetCellDelegate {
         let nav = UINavigationController(rootViewController: controller)
         nav.modalPresentationStyle = .fullScreen
         present(nav, animated: true, completion: nil)
+    }
+    
+    func handleLikeTapped(_ cell: TweetCell) {
+        guard let tweet = cell.tweet else { return }
+        TweetService.shared.toggleLike(tweet: tweet) { (err, ref) in
+            cell.tweet?.didLike.toggle()
+            
+            let likes = tweet.didLike ? tweet.likes - 1 : tweet.likes + 1
+            cell.tweet?.likes = likes
+        }
+        
     }
 }
