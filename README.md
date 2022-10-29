@@ -11,10 +11,10 @@
 <p align="center">
   <a href="features">Features</a> •
   <a href="#tech-stack">Tech Stack</a> •
-  <a href="#license">License</a> •
+  <a href="#license">License</a>
 </p>
 
-![screenshot](https://raw.githubusercontent.com/amitmerchant1990/electron-markdownify/master/app/img/markdownify.gif)
+![screenshot](https://github.com/mireabot/TwitterClone/blob/main/Scene%204.png)
 
 ## Features
 
