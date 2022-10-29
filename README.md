@@ -9,8 +9,9 @@
 <h4 align="center">Twitter Clone App made without storyboards.</h4>
 
 <p align="center">
-  <a href="#key-features">Features</a> •
-  <a href="#how-to-use">Tech Stack</a> •
+  <a href="features">Features</a> •
+  <a href="#tech-stack">Tech Stack</a> •
+  <a href="#license">License</a> •
 </p>
 
 ![screenshot](https://raw.githubusercontent.com/amitmerchant1990/electron-markdownify/master/app/img/markdownify.gif)
@@ -39,5 +40,4 @@
 
 MIT
 
----
 
