@@ -14,11 +14,11 @@
   <a href="#license">License</a>
 </p>
 
-![screenshot](https://github.com/mireabot/TwitterClone/blob/main/Scene%204.png)
+![screenshot](https://github.com/mireabot/TwitterClone/blob/main/Scene%204_1.png)
 
 ## Features
 
-* Create tweets
+* Create and delete tweets
   - Reply to other user's tweet
 * Notifications
   - See who liked your tweets, followed or unfollowed
