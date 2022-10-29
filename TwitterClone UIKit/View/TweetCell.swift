@@ -54,7 +54,7 @@ class TweetCell : UICollectionViewCell {
     
     private lazy var commentButton: UIButton = {
         let button = UIButton()
-        button.setImage(UIImage(named: "comment"), for: .normal)
+        button.setImage(UIImage(systemName: "message"), for: .normal)
         button.tintColor = .darkGray
         button.setDimensions(width: 20, height: 20)
         button.addTarget(self, action: #selector(handleCommentTapped), for: .touchUpInside)
@@ -63,7 +63,7 @@ class TweetCell : UICollectionViewCell {
     
     private lazy var retweetButton: UIButton = {
         let button = UIButton()
-        button.setImage(UIImage(named: "retweet"), for: .normal)
+        button.setImage(UIImage(systemName: "repeat"), for: .normal)
         button.tintColor = .darkGray
         button.setDimensions(width: 20, height: 20)
         button.addTarget(self, action: #selector(handleRetweetTapped), for: .touchUpInside)
@@ -72,7 +72,7 @@ class TweetCell : UICollectionViewCell {
     
     private lazy var likeButton: UIButton = {
         let button = UIButton()
-        button.setImage(UIImage(named: "like"), for: .normal)
+        button.setImage(UIImage(systemName: "hand.thumbsup"), for: .normal)
         button.tintColor = .darkGray
         button.setDimensions(width: 20, height: 20)
         button.addTarget(self, action: #selector(handleLikeTapped), for: .touchUpInside)
@@ -81,7 +81,7 @@ class TweetCell : UICollectionViewCell {
     
     private lazy var shareButton: UIButton = {
         let button = UIButton()
-        button.setImage(UIImage(named: "share"), for: .normal)
+        button.setImage(UIImage(systemName: "square.and.arrow.up.on.square"), for: .normal)
         button.tintColor = .darkGray
         button.setDimensions(width: 20, height: 20)
         button.addTarget(self, action: #selector(handleShareTapped), for: .touchUpInside)

@@ -29,6 +29,12 @@ class ProfileFilter: UIView {
         return cv
     }()
     
+    private let underlineView: UIView = {
+        let view = UIView()
+        view.backgroundColor = .twitterBlue
+        return view
+    }()
+    
     //MARK: - LifeCycle
     
     override init(frame: CGRect) {
@@ -40,6 +46,11 @@ class ProfileFilter: UIView {
         collectionView.selectItem(at: selected, animated: true, scrollPosition: .left)
         addSubview(collectionView)
         collectionView.addConstraintsToFillView(self)
+    }
+    
+    override func layoutSubviews() {
+        addSubview(underlineView)
+        underlineView.anchor(left: leftAnchor, bottom: bottomAnchor, width: frame.width / 3, height: 2)
     }
     
     required init?(coder: NSCoder) {
@@ -78,6 +89,13 @@ extension ProfileFilter : UICollectionViewDelegateFlowLayout {
 
 extension ProfileFilter: UICollectionViewDelegate {
     func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
+        let cell = collectionView.cellForItem(at: indexPath)
+        let xPos = cell?.frame.origin.x
+        
+        UIView.animate(withDuration: 0.3) {
+            self.underlineView.frame.origin.x = xPos ?? 0
+        }
+        
         delegate?.filterView(self, didSet: indexPath)
     }
 }

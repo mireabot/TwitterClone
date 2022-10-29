@@ -123,7 +123,7 @@ class TweetHeader: UICollectionReusableView {
     }()
     
     private lazy var likeButton : UIButton = {
-        let button = createButton(withImage: "like")
+        let button = createButton(withImage: "hand.thumbsup")
         button.addTarget(self, action: #selector(handleLikeButton), for: .touchUpInside)
         return button
     }()
@@ -180,7 +180,7 @@ class TweetHeader: UICollectionReusableView {
     
     func createButton(withImage image: String) -> UIButton {
         let button = UIButton(type: .system)
-        button.setImage(UIImage(named: image), for: .normal)
+        button.setImage(UIImage(systemName: image), for: .normal)
         button.tintColor = .darkGray
         button.setDimensions(width: 20, height: 20)
         return button
@@ -197,6 +197,8 @@ class TweetHeader: UICollectionReusableView {
         dateLabel.text = viewModel.headerTimeStamp
         likesLabel.attributedText = viewModel.likeString
         retweetLabel.attributedText = viewModel.retweetString
+        likeButton.setImage(viewModel.likeButtonImage, for: .normal)
+        likeButton.tintColor = viewModel.likeButtonTint
     }
     
     //MARK: - Selectors

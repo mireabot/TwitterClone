@@ -25,7 +25,7 @@ class MainTabController: UITabBarController {
         let button = UIButton(type: .system)
         button.tintColor = .white
         button.backgroundColor = .twitterBlue
-        button.setImage(UIImage(named: "new_tweet"), for: .normal)
+        button.setImage(UIImage(systemName: "pencil"), for: .normal)
         button.addTarget(self, action: #selector(handleActionButtonTapped), for: .touchUpInside)
         return button
     }()
@@ -34,7 +34,6 @@ class MainTabController: UITabBarController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        //        logOut()
         view.backgroundColor = .twitterBlue
         authUserandUpdateUI()
         
@@ -63,14 +62,6 @@ class MainTabController: UITabBarController {
         }
     }
     
-    func logOut() {
-        do {
-            try Auth.auth().signOut()
-        }
-        catch let error {
-            print("DEBUG: Failed with \(error.localizedDescription)")
-        }
-    }
     //MARK: - Selectors
     @objc func handleActionButtonTapped() {
         guard let user = user else { return }
@@ -91,25 +82,22 @@ class MainTabController: UITabBarController {
     
     func configureViewController() {
         let feed = FeedViewController(collectionViewLayout: UICollectionViewFlowLayout())
-        let nav1 = templateNavController(image: UIImage(named: "home_unselected"), rootViewController: feed)
+        let nav1 = templateNavController(image: UIImage(systemName: "house"), rootViewController: feed)
         
         let explore = ExploreController()
-        let nav2 = templateNavController(image: UIImage(named: "search_unselected"), rootViewController: explore)
+        let nav2 = templateNavController(image: UIImage(systemName: "magnifyingglass"), rootViewController: explore)
         
-        let notifications = NotificationsViewController()
-        let nav3 = templateNavController(image: UIImage(named: "like_unselected"), rootViewController: notifications)
+        let notifications = NotificationsController()
+        let nav3 = templateNavController(image: UIImage(systemName: "tray"), rootViewController: notifications)
         
-        let messaging = MessagingViewController()
-        let nav4 = templateNavController(image: UIImage(named: "ic_mail_outline_white_2x-1"), rootViewController: messaging)
-        
-        viewControllers = [nav1, nav2, nav3, nav4]
+        viewControllers = [nav1, nav2, nav3]
     }
     
     func templateNavController(image: UIImage?, rootViewController: UIViewController) -> UINavigationController {
         let nav = UINavigationController(rootViewController: rootViewController)
         nav.tabBarItem.image = image
         nav.navigationBar.barTintColor = .white
-        nav.navigationBar.tintColor = .twitterBlue
+        //nav.navigationBar.tintColor = .twitterBlue
         return nav
     }
 }

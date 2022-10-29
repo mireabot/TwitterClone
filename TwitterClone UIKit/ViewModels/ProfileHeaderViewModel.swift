@@ -42,7 +42,7 @@ struct ProfileHeaderViewModel {
     
     var actionButtonTitle: String {
         if user.isCurrentUser {
-            return "Edit profile"
+            return "Log Out"
         }
         if !user.isFollowed && !user.isCurrentUser {
             return "Follow"

@@ -17,6 +17,9 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         
         FirebaseApp.configure()
         
+        UITabBar.appearance().tintColor = .twitterBlue
+        UITabBar.appearance().unselectedItemTintColor = .lightGray
+        
         return true
     }
 

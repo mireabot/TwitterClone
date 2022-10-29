@@ -55,6 +55,7 @@ class ProfileController : UICollectionViewController {
     func fetchTweets() {
         TweetService.shared.fetchTweets(forUser: user) { tweets in
             self.tweets = tweets
+            self.collectionView.reloadData()
         }
     }
     
@@ -80,6 +81,9 @@ class ProfileController : UICollectionViewController {
         collectionView.contentInsetAdjustmentBehavior = .never
         collectionView.register(TweetCell.self, forCellWithReuseIdentifier: reuseIdentifier)
         collectionView.register(ProfileHeader.self, forSupplementaryViewOfKind: UICollectionView.elementKindSectionHeader, withReuseIdentifier: headerIdentifier)
+        
+        guard let tableHeight = tabBarController?.tabBar.frame.height else { return }
+        collectionView.contentInset.bottom = tableHeight
     }
 }
     //MARK: - UICollectionViewData
@@ -112,7 +116,7 @@ extension ProfileController {
 extension ProfileController : UICollectionViewDelegateFlowLayout {
     
     func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, referenceSizeForHeaderInSection section: Int) -> CGSize {
-        return CGSize(width: view.frame.width, height: 350)
+        return CGSize(width: view.frame.width, height: 300)
     }
     
     func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, sizeForItemAt indexPath: IndexPath) -> CGSize {
@@ -126,11 +130,28 @@ extension ProfileController : UICollectionViewDelegateFlowLayout {
 
 extension ProfileController: ProfileHeaderDelegate {
     func handleEditServiceButton(_ header: ProfileHeader) {
-        
         print("DEBUG: User is followed is \(user.isFollowed) before tap")
         
         if user.isCurrentUser {
-            print("DEBUG: User cannot follow himself")
+            
+            let alert = UIAlertController(title: "Are you sure?", message: "Do you want to log out?", preferredStyle: .actionSheet)
+            alert.addAction(UIAlertAction(title: "Log Out", style: .destructive, handler: { _ in
+                do {
+                    try Auth.auth().signOut()
+                    
+                    let nav = UINavigationController(rootViewController: LoginViewController())
+                    nav.modalPresentationStyle = .fullScreen
+                    self.present(nav,animated: true, completion: nil)
+                    
+                }
+                catch let error {
+                    print("DEBUG: Failed with \(error.localizedDescription)")
+                }
+            }))
+            alert.addAction(UIAlertAction(title: "Cancel", style: .cancel, handler: nil))
+            
+            present(alert, animated: true)
+            
             return
         }
         
@@ -147,6 +168,8 @@ extension ProfileController: ProfileHeaderDelegate {
                 self.user.isFollowed = true
                 //header.serviceButton.setTitle("Following", for: .normal)
                 self.collectionView.reloadData()
+                
+                NotificationService.shared.uploadNotificationType(type: .follow, user: self.user)
             }
         }
     }
