@@ -6,8 +6,6 @@
   <br>
 </h1>
 
-[![GitHub license](https://img.shields.io/github/license/Naereen/StrapDown.js.svg)](https://github.com/mireabot/TwitterClone/blob/main/LICENSE)
-
 <h4 align="center">Twitter Clone App made without storyboards.</h4>
 
 <p align="center">
